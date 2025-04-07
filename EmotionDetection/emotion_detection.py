@@ -22,6 +22,6 @@ def emotion_detector(text_to_analyse):
     for key in ['anger', 'disgust', 'fear', 'joy', 'sadness']:
         if output[key] > max_value:
             max_value = output[key]
-            highest_emotion = key.capitalize()
+            highest_emotion = key
     output['dominant_emotion'] = highest_emotion
     return output
