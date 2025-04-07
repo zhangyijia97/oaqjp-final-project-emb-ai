@@ -1,3 +1,6 @@
+"""Flask server that takes in a string and outputs the emotion values of that string
+"""
+
 from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -5,6 +8,9 @@ app = Flask("Emotion Detector")
 
 @app.route("/emotionDetector")
 def sent_analyzer():
+    """Gets input and sends it to be analysed
+    Returns the results of the analysis
+    """
     text_to_analyze = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyze)
 
@@ -15,7 +21,7 @@ def sent_analyzer():
     sadness = response['sadness']
     dominant_emotion = response['dominant_emotion']
 
-    if dominant_emotion == None:
+    if dominant_emotion is None:
         return "Invalid text! Please try again!"
 
     return (f"For the given statement, the system response is "
@@ -28,6 +34,8 @@ def sent_analyzer():
 
 @app.route("/")
 def render_index_page():
+    """Renders base page
+    """
     return render_template('index.html')
 
 if __name__ == "__main__":
